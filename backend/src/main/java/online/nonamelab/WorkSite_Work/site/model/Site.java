@@ -38,7 +38,7 @@ public class Site extends BaseEntity {
 
     // RESPONSIBLE MANAGER
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "manager_id")
+    @JoinColumn(name = "manager_id", nullable = false)
     private User manager;
 
 }

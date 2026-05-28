@@ -7,6 +7,7 @@ import online.nonamelab.WorkSite_Work.security.exception.CustomAuthenticationEnt
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -63,12 +64,20 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
 
                         // PUBLIC
+                        .requestMatchers("/api/auth/login").permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
 
                         // USER ADMIN AREA
-
+                        .requestMatchers("/api/admin/sites/**").hasAnyRole("ADMIN", "MANAGER")
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/users/**").authenticated()
+                        // SITE READ
+                        .requestMatchers(HttpMethod.GET, "/api/sites/**")
+                        .authenticated()
+
+                        // SITE MANAGEMENT
+//                        .requestMatchers("/api/sites/**")
+//                        .hasAnyRole("ADMIN", "MANAGER")
 
                         // EVERYTHING ELSE
                         .anyRequest().authenticated()
