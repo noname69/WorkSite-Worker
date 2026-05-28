@@ -1,6 +1,9 @@
 package online.nonamelab.WorkSite_Work.security.current;
 
 import lombok.RequiredArgsConstructor;
+import online.nonamelab.WorkSite_Work.exception.auth.InvalidAuthenticationPrincipalException;
+import online.nonamelab.WorkSite_Work.exception.auth.UnauthenticatedException;
+import online.nonamelab.WorkSite_Work.exception.user.UserNotFoundException;
 import online.nonamelab.WorkSite_Work.security.principal.UserPrincipal;
 import online.nonamelab.WorkSite_Work.user.model.User;
 import online.nonamelab.WorkSite_Work.user.repository.UserRepository;
@@ -21,18 +24,18 @@ public class CurrentUser {
                 SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication == null || !authentication.isAuthenticated()) {
-            throw new RuntimeException("Unauthenticated");
+            throw new UnauthenticatedException();
         }
 
         Object principal = authentication.getPrincipal();
 
         if (!(principal instanceof Jwt jwt)) {
-            throw new RuntimeException("Invalid authentication principal: " + principal);
+            throw new InvalidAuthenticationPrincipalException();
         }
 
         String username = jwt.getSubject(); // IMPORTANT
 
         return userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(UserNotFoundException::new);
     }
 }

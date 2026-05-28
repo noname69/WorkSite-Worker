@@ -39,24 +39,24 @@ public class JwtService {
                 .compact();
     }
 
-    public String extractUsername(String token) {
-
-        return extractAllClaims(token)
-                .getSubject();
-    }
-
-    public Claims extractAllClaims(String token) {
-
-        return Jwts.parserBuilder()
-                .setSigningKey(getSigningKey())
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
-    }
-
-    public boolean isTokenValid(String token, UserDetails userDetails) {
-
-        String username = extractUsername(token);
-        return username.equals(userDetails.getUsername());
-    }
+//    public String extractUsername(String token) {
+//
+//        return extractAllClaims(token)
+//                .getSubject();
+//    }
+//
+//    public Claims extractAllClaims(String token) {
+//
+//        return Jwts.parserBuilder()
+//                .setSigningKey(getSigningKey())
+//                .build()
+//                .parseClaimsJws(token)
+//                .getBody();
+//    }
+//
+//    public boolean isTokenValid(String token, UserDetails userDetails) {
+//
+//        String username = extractUsername(token);
+//        return username.equals(userDetails.getUsername());
+//    }
 }

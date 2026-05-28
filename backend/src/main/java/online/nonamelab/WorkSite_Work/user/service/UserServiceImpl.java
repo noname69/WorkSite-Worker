@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserService {
     // =========================
     @Override
     public AdminUserResponse getUserById(Long id) {
-        User user = userRepository.findByIdAndDeletedAtIsNull(id)
+        User user = userRepository.findById(id)
                 .orElseThrow(UserNotFoundException::new
                 );
 

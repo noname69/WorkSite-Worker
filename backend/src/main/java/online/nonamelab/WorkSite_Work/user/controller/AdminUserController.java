@@ -19,7 +19,9 @@ public class AdminUserController {
     private final UserService userService;
 
     @PostMapping
-    public AdminUserResponse create(@Valid @RequestBody CreateUserRequest request) {
+    public AdminUserResponse create(
+            @Valid @RequestBody CreateUserRequest request
+    ) {
         return userService.create(request);
     }
 
@@ -41,7 +43,7 @@ public class AdminUserController {
     @PatchMapping("/{id}")
     public ResponseEntity<AdminUserResponse> updateUser(
             @PathVariable Long id,
-            @RequestBody UpdateUserRequest request
+            @Valid @RequestBody UpdateUserRequest request
     ) {
         return ResponseEntity.ok(userService.updateUserProfile(id, request));
     }

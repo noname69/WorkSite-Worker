@@ -1,4 +1,4 @@
-package online.nonamelab.WorkSite_Work.common.entiry;
+package online.nonamelab.WorkSite_Work.common.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;

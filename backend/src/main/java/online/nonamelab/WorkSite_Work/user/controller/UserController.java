@@ -37,7 +37,7 @@ public class UserController {
     @PatchMapping("/me/password")
     public ResponseEntity<Void> changePassword(
             @Valid @RequestBody ChangePasswordRequest request
-    ) throws InvalidPasswordException {
+    ) {
         userService.changePassword(request);
         return ResponseEntity.noContent().build();
     }
