@@ -52,13 +52,7 @@ public class AdminUserController {
         return ResponseEntity.noContent().build();
     }
 
-    @PatchMapping("/{id}/status")
-    public ResponseEntity<AdminUserResponse> updateStatus(
-            @PathVariable Long id,
-            @RequestBody UpdateUserStatusRequest request
-    ) {
-        return ResponseEntity.ok(userService.updateUserStatus(id, request));
-    }
+
     @PatchMapping("/{id}/restore")
     public ResponseEntity<Void> restoreUser(@PathVariable Long id) {
         userService.restoreUser(id);

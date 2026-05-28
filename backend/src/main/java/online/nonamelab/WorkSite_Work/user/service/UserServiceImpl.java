@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
     }
 
     // =========================
-    // ADMIN GET BY ID
+    // GET BY ID (ADMIN)
     // =========================
     @Override
     public AdminUserResponse getUserById(Long id) {
@@ -89,7 +89,7 @@ public class UserServiceImpl implements UserService {
     }
 
     // =========================
-    // ADMIN GET ALL
+    // GET ALL(ADMIN)
     // =========================
     @Override
     public List<AdminUserResponse> getUsers() {
@@ -110,20 +110,8 @@ public class UserServiceImpl implements UserService {
         return userMapper.toAdminResponse(userRepository.save(user));
     }
 
-
-    @Override
-    public AdminUserResponse updateUserStatus(Long id, UpdateUserStatusRequest request) {
-        User user = userRepository.findByIdAndDeletedAtIsNull(id)
-                .orElseThrow(UserNotFoundException::new
-                );
-
-        user.setStatus(request.status());
-
-        return userMapper.toAdminResponse(userRepository.save(user));
-    }
-
     // =========================
-    // ADMIN DELETE(SOFT USER
+    // DELETE(SOFT) USER (ADMIN)
     // =========================
     @Override
     public void deleteUser(Long id) {
@@ -144,7 +132,7 @@ public class UserServiceImpl implements UserService {
     }
 
     // =========================
-    // RESTORE USER (ADMIN ONLY)
+    // RESTORE USER (ADMIN)
     // =========================
     @Override
     public void restoreUser(Long id) {

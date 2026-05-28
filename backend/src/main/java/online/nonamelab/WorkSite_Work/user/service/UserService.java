@@ -22,8 +22,6 @@ public interface UserService {
 
     AdminUserResponse updateUserProfile(Long id, UpdateUserRequest request);
 
-    AdminUserResponse updateUserStatus(Long id, UpdateUserStatusRequest request);
-
     void deleteUser(Long id);
 
     void restoreUser(Long id);
