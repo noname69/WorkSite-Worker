@@ -3,6 +3,8 @@ package online.nonamelab.WorkSite_Work.auth.service;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import online.nonamelab.WorkSite_Work.auth.dto.AuthResponse;
+import online.nonamelab.WorkSite_Work.auth.dto.LoginRequest;
+import online.nonamelab.WorkSite_Work.exception.auth.InvalidCredentialsException;
 import online.nonamelab.WorkSite_Work.security.jwt.JwtService;
 import online.nonamelab.WorkSite_Work.user.model.User;
 import online.nonamelab.WorkSite_Work.user.repository.UserRepository;
@@ -13,6 +15,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -23,17 +26,21 @@ public class AuthServiceImpl implements AuthService {
     private final JwtService jwtService;
 
     @Override
-    public AuthResponse login(String username,
-                              String password,
+    public AuthResponse login(LoginRequest request,
                               HttpServletResponse response) {
 
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(username, password)
+                new UsernamePasswordAuthenticationToken(
+                        request.username(),
+                        request.password())
         );
 
         // 2. Load user from DB
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("Invalid username or password"));
+        User user = userRepository.findByUsername(request.username())
+                .orElseThrow(InvalidCredentialsException::new);
+
+        user.setLastLoginAt(LocalDateTime.now());
+        userRepository.save(user);
 
         // 3. Generate JWT
         String token = jwtService.generateToken(user);

@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import online.nonamelab.WorkSite_Work.common.entiry.BaseEntity;
+import online.nonamelab.WorkSite_Work.common.entity.BaseEntity;
 import online.nonamelab.WorkSite_Work.site.model.Site;
 import online.nonamelab.WorkSite_Work.user.model.User;
 

@@ -23,8 +23,8 @@ public class GlobalExceptionHandler {
 
         ApiError error = new ApiError(
                 401,
-                "Invalid username or password",
                 "BAD_CREDENTIALS",
+                "Invalid username or password",
                 request.getRequestURI(),
                 LocalDateTime.now(),
                 List.of()
@@ -41,8 +41,8 @@ public class GlobalExceptionHandler {
 
         ApiError error = new ApiError(
                 ex.getStatus().value(),
-                ex.getMessage(),
                 ex.getStatus().name(),
+                ex.getMessage(),
                 request.getRequestURI(),
                 LocalDateTime.now(),
                 List.of()
@@ -64,8 +64,8 @@ public class GlobalExceptionHandler {
 
         ApiError error = new ApiError(
                 HttpStatus.BAD_REQUEST.value(),
-                "Validation failed",
                 "VALIDATION_ERROR",
+                "Validation failed",
                 request.getRequestURI(),
                 LocalDateTime.now(),
                 fieldErrors
@@ -81,4 +81,21 @@ public class GlobalExceptionHandler {
         );
     }
 
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ApiError> handleUnknown(
+            Exception ex,
+            HttpServletRequest request
+    ) {
+
+        ApiError error = new ApiError(
+                500,
+                "INTERNAL_ERROR",
+                "Internal server error",
+                request.getRequestURI(),
+                LocalDateTime.now(),
+                List.of()
+        );
+
+        return ResponseEntity.internalServerError().body(error);
+    }
 }
