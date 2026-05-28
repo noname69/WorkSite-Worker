@@ -11,11 +11,20 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface SiteMapper {
     @Mapping(target = "managerId", source = "manager.id")
-    @Mapping(
-            target = "managerFullName",
-            expression = "java(site.getManager().getFirstName() + \" \" + site.getManager().getLastName())"
-    )
+    @Mapping(target = "managerFullName", expression = "java(getManagerFullName(site))")
     SiteResponse toResponse(Site site);
+
+    default String getManagerFullName(Site site) {
+        if (site.getManager() == null) {
+            return null;
+        }
+
+        String firstName = site.getManager().getFirstName();
+        String lastName = site.getManager().getLastName();
+
+        return ((firstName == null ? "" : firstName) + " " +
+                (lastName == null ? "" : lastName)).trim();
+    }
 
     List<SiteResponse> toResponseList(List<Site> sites);
 

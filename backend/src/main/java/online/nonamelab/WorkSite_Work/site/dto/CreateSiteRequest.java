@@ -4,9 +4,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import online.nonamelab.WorkSite_Work.site.model.SiteStatus;
-import online.nonamelab.WorkSite_Work.user.model.User;
-
-import java.time.LocalDateTime;
 
 public record CreateSiteRequest(
 
@@ -28,8 +25,8 @@ public record CreateSiteRequest(
         Double latitude,
         Double longitude,
 
-        @NotNull(message = "Status is required")
-        SiteStatus status,
+//        @NotNull(message = "Status is required")
+//        SiteStatus status,
 
         Long managerId
 ) {

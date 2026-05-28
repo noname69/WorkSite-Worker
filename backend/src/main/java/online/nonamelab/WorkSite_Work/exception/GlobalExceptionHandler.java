@@ -5,6 +5,7 @@ import online.nonamelab.WorkSite_Work.exception.core.ApiException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -81,21 +82,41 @@ public class GlobalExceptionHandler {
         );
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ApiError> handleUnknown(
-            Exception ex,
+    @ExceptionHandler(DisabledException.class)
+    public ResponseEntity<ApiError> handleDisabledUser(
+            DisabledException ex,
             HttpServletRequest request
     ) {
 
         ApiError error = new ApiError(
-                500,
-                "INTERNAL_ERROR",
-                "Internal server error",
+                HttpStatus.UNAUTHORIZED.value(),
+                "USER_DISABLED",
+                "User account is inactive",
                 request.getRequestURI(),
                 LocalDateTime.now(),
                 List.of()
         );
 
-        return ResponseEntity.internalServerError().body(error);
+        return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
+                .body(error);
     }
+
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity<ApiError> handleUnknown(
+//            Exception ex,
+//            HttpServletRequest request
+//    ) {
+//
+//        ApiError error = new ApiError(
+//                500,
+//                "INTERNAL_ERROR",
+//                "Internal server error",
+//                request.getRequestURI(),
+//                LocalDateTime.now(),
+//                List.of()
+//        );
+//
+//        return ResponseEntity.internalServerError().body(error);
+//    }
 }
