@@ -56,6 +56,7 @@ export default function SitesPage() {
 
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("ALL");
+  const [managerFilter, setManagerFilter] = useState("ALL");
 
   const [editingSite, setEditingSite] = useState<SiteResponse | null>(null);
   const [deletingSite, setDeletingSite] = useState<SiteResponse | null>(null);
@@ -82,9 +83,12 @@ export default function SitesPage() {
 
       const matchesStatus = statusFilter === "ALL" || site.status === statusFilter;
 
-      return matchesSearch && matchesStatus;
+      const matchesManager =
+        managerFilter === "ALL" || String(site.managerId) === managerFilter;
+
+      return matchesSearch && matchesStatus && matchesManager;
     });
-  }, [sites, search, statusFilter]);
+  }, [sites, search, statusFilter, managerFilter]);
 
   const handleUpdateStatus = async (siteId: number, status: SiteStatus) => {
     try {
@@ -114,13 +118,16 @@ export default function SitesPage() {
         <SiteFilters
           search={search}
           statusFilter={statusFilter}
+          managerFilter={managerFilter}
           canCreateSite={canCreateSite}
           onSearchChange={setSearch}
           onStatusFilterChange={setStatusFilter}
+          onManagerFilterChange={setManagerFilter}
           onCreateSite={() => setIsCreateModalOpen(true)}
           onResetFilters={() => {
             setSearch("");
             setStatusFilter("ALL");
+            setManagerFilter("ALL");
           }}
         />
 

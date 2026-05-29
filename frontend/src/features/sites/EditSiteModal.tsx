@@ -8,6 +8,8 @@ import { useToastStore } from "../../store/toastStore";
 import { useSiteStore } from "./siteStore";
 import type { SiteResponse, UpdateSiteRequest } from "./siteTypes";
 
+import ManagerSelect from "../../components/forms/ManagerSelect";
+
 type EditSiteModalProps = {
   isOpen: boolean;
   site: SiteResponse | null;
@@ -23,11 +25,7 @@ type EditSiteForm = {
   managerId: string;
 };
 
-export default function EditSiteModal({
-  isOpen,
-  site,
-  onClose,
-}: EditSiteModalProps) {
+export default function EditSiteModal({ isOpen, site, onClose }: EditSiteModalProps) {
   const { t } = useTranslation(["sites", "common"]);
   const updateSite = useSiteStore((state) => state.updateSite);
   const showToast = useToastStore((state) => state.showToast);
@@ -36,6 +34,8 @@ export default function EditSiteModal({
     register,
     handleSubmit,
     reset,
+    watch,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<EditSiteForm>({
     defaultValues: {
@@ -216,19 +216,13 @@ export default function EditSiteModal({
 
             <label className="block md:col-span-2">
               <span className="text-sm font-semibold">
-                {t("form.managerId", { ns: "sites" })}
+                {t("form.manager", { ns: "sites" })}
               </span>
 
-              <input
-                type="number"
-                className="mt-2 w-full rounded-xl border border-[#e6e8ec] bg-white px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-[#e8ebf0]"
-                placeholder="Example: 2"
-                {...register("managerId")}
+              <ManagerSelect
+                value={watch("managerId")}
+                onChange={(value) => setValue("managerId", value)}
               />
-
-              <p className="mt-1 text-xs text-[#6b7280]">
-                {t("form.managerHelp", { ns: "sites" })}
-              </p>
             </label>
           </div>
 

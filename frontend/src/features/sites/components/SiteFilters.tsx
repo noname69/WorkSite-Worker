@@ -1,11 +1,15 @@
 import { Plus, Search } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useUserStore } from "../../users/userStore";
+import { useEffect } from "react";
 
 type SiteFiltersProps = {
   search: string;
   statusFilter: string;
   canCreateSite: boolean;
+  managerFilter: string;
 
+  onManagerFilterChange: (value: string) => void;
   onSearchChange: (value: string) => void;
   onStatusFilterChange: (value: string) => void;
   onResetFilters: () => void;
@@ -15,13 +19,22 @@ type SiteFiltersProps = {
 export default function SiteFilters({
   search,
   statusFilter,
+  managerFilter,
   canCreateSite,
   onSearchChange,
   onStatusFilterChange,
+  onManagerFilterChange,
   onResetFilters,
   onCreateSite,
 }: SiteFiltersProps) {
   const { t } = useTranslation(["sites", "common", "siteStatus"]);
+
+  const managers = useUserStore((state) => state.managers);
+  const fetchManagers = useUserStore((state) => state.fetchManagers);
+
+  useEffect(() => {
+    fetchManagers();
+  }, [fetchManagers]);
 
   return (
     <div className="border-b border-[#e6e8ec] px-6 py-5">
@@ -68,6 +81,20 @@ export default function SiteFilters({
           <option value="PAUSED">{t("PAUSED", { ns: "siteStatus" })}</option>
           <option value="INACTIVE">{t("INACTIVE", { ns: "siteStatus" })}</option>
           <option value="ARCHIVED">{t("ARCHIVED", { ns: "siteStatus" })}</option>
+        </select>
+
+        <select
+          className="rounded-lg border border-[#e6e8ec] bg-white px-3 py-2 text-sm outline-none"
+          value={managerFilter}
+          onChange={(event) => onManagerFilterChange(event.target.value)}
+        >
+          <option value="ALL">All managers</option>
+
+          {managers.map((manager) => (
+            <option key={manager.id} value={manager.id}>
+              {manager.firstName} {manager.lastName}
+            </option>
+          ))}
         </select>
 
         <button

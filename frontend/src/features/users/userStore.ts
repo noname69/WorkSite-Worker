@@ -3,17 +3,28 @@ import {
   createAdminUser,
   deleteAdminUser,
   getAdminUsers,
+  getUserOptions,
   restoreAdminUser,
   updateAdminUser,
 } from "./userApi";
-import type { CreateUserRequest, UpdateUserRequest, UserResponse } from "./userTypes";
+import type {
+  CreateUserRequest,
+  UpdateUserRequest,
+  UserOption,
+  UserResponse,
+} from "./userTypes";
 
 type UserStore = {
   users: UserResponse[];
+  managers: UserOption[];
+
   isLoading: boolean;
+  isLoadingManagers: boolean;
   error: string | null;
 
   fetchUsers: () => Promise<void>;
+  fetchManagers: () => Promise<void>;
+
   createUser: (request: CreateUserRequest) => Promise<void>;
   updateUser: (id: number, request: UpdateUserRequest) => Promise<void>;
   deleteUser: (id: number) => Promise<void>;
@@ -22,7 +33,10 @@ type UserStore = {
 
 export const useUserStore = create<UserStore>((set, get) => ({
   users: [],
+  managers: [],
+
   isLoading: false,
+  isLoadingManagers: false,
   error: null,
 
   fetchUsers: async () => {
@@ -36,6 +50,18 @@ export const useUserStore = create<UserStore>((set, get) => ({
       set({ error: "Failed to load users" });
     } finally {
       set({ isLoading: false });
+    }
+  },
+
+  fetchManagers: async () => {
+    try {
+      set({ isLoadingManagers: true });
+
+      const managers = await getUserOptions("MANAGER");
+
+      set({ managers });
+    } finally {
+      set({ isLoadingManagers: false });
     }
   },
 

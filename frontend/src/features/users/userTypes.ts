@@ -31,3 +31,10 @@ export type UpdateUserRequest = {
   phoneNumber?: string | null;
   role?: UserRole;
 };
+
+export type UserOption = {
+  id: number;
+  firstName: string;
+  lastName: string;
+  username: string;
+};

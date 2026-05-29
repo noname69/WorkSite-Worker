@@ -187,4 +187,13 @@ public class UserServiceImpl implements UserService {
 
         userRepository.save(user);
     }
+
+    @Override
+    public List<UserOptionResponse> getUserOptions(UserRole role) {
+        return userRepository
+                .findByRoleAndDeletedAtIsNullOrderByFirstNameAscLastNameAsc(role)
+                .stream()
+                .map(userMapper::toOptionResponse)
+                .toList();
+    }
 }

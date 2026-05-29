@@ -7,6 +7,8 @@ import { useToastStore } from "../../store/toastStore";
 import { useSiteStore } from "./siteStore";
 import type { CreateSiteRequest } from "./siteTypes";
 
+import ManagerSelect from "../../components/forms/ManagerSelect";
+
 type CreateSiteModalProps = {
   isOpen: boolean;
   onClose: () => void;
@@ -21,10 +23,7 @@ type CreateSiteForm = {
   managerId: string;
 };
 
-export default function CreateSiteModal({
-  isOpen,
-  onClose,
-}: CreateSiteModalProps) {
+export default function CreateSiteModal({ isOpen, onClose }: CreateSiteModalProps) {
   const { t } = useTranslation(["sites", "common"]);
   const createSite = useSiteStore((state) => state.createSite);
   const showToast = useToastStore((state) => state.showToast);
@@ -32,6 +31,8 @@ export default function CreateSiteModal({
   const {
     register,
     handleSubmit,
+    watch,
+    setValue,
     reset,
     formState: { errors, isSubmitting },
   } = useForm<CreateSiteForm>({
@@ -198,19 +199,13 @@ export default function CreateSiteModal({
 
             <label className="block md:col-span-2">
               <span className="text-sm font-semibold">
-                {t("form.managerId", { ns: "sites" })}
+                {t("form.manager", { ns: "sites" })}
               </span>
 
-              <input
-                type="number"
-                className="mt-2 w-full rounded-xl border border-[#e6e8ec] bg-white px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-[#e8ebf0]"
-                placeholder="Example: 2"
-                {...register("managerId")}
+              <ManagerSelect
+                value={watch("managerId")}
+                onChange={(value) => setValue("managerId", value)}
               />
-
-              <p className="mt-1 text-xs text-[#6b7280]">
-                {t("form.managerHelp", { ns: "sites" })}
-              </p>
             </label>
           </div>
 

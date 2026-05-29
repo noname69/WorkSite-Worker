@@ -58,7 +58,7 @@
     "country": "Šalis",
     "city": "Miestas",
     "address": "Adresas",
-    "managerId": "Vadovo ID",
+    "manager": "Vadovas",
     "managerHelp": "Laikinas laukas. Vėliau pakeisime į vadovo pasirinkimą iš sąrašo."
   },
 

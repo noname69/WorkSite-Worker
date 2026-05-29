@@ -3,7 +3,9 @@ import type {
   CreateUserRequest,
   UpdateUserRequest,
   UserResponse,
+  UserOption
 } from "./userTypes";
+
 
 export async function getAdminUsers() {
   const response = await api.get<UserResponse[]>("/admin/users");
@@ -31,4 +33,12 @@ export async function deleteAdminUser(id: number) {
 
 export async function restoreAdminUser(id: number) {
   await api.patch(`/admin/users/${id}/restore`);
+}
+
+export async function getUserOptions(role: string) {
+  const response = await api.get<UserOption[]>(
+    `/admin/users/options?role=${role}`,
+  );
+
+  return response.data;
 }

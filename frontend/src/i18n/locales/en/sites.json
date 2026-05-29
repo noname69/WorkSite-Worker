@@ -58,7 +58,7 @@
     "country": "Country",
     "city": "City",
     "address": "Address",
-    "managerId": "Manager ID",
+    "manager": "Manager",
     "managerHelp": "Temporary field. Later we will replace it with manager dropdown."
   },
   "validation": {

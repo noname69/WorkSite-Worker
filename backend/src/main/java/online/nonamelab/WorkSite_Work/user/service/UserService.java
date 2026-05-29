@@ -1,6 +1,7 @@
 package online.nonamelab.WorkSite_Work.user.service;
 
 import online.nonamelab.WorkSite_Work.user.dto.*;
+import online.nonamelab.WorkSite_Work.user.model.UserRole;
 
 import java.util.List;
 
@@ -25,4 +26,6 @@ public interface UserService {
     void deleteUser(Long id);
 
     void restoreUser(Long id);
+
+    List<UserOptionResponse> getUserOptions(UserRole role);
 }
