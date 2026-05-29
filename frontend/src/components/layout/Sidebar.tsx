@@ -1,28 +1,13 @@
-import {
-  BarChart3,
-  Building2,
-  Clock3,
-  FolderKanban,
-  HardHat,
-  LayoutDashboard,
-  MapPin,
-  Settings,
-  Users,
-} from "lucide-react";
+import { HardHat } from "lucide-react";
 import { NavLink } from "react-router";
-
-const navItems = [
-  { label: "Dashboard", path: "/", icon: LayoutDashboard },
-  { label: "Users", path: "/users", icon: Users },
-  { label: "Sites", path: "/sites", icon: Building2 },
-  { label: "Assignments", path: "/assignments", icon: MapPin },
-  { label: "Projects", path: "/projects", icon: FolderKanban },
-  { label: "Time Entries", path: "/time-entries", icon: Clock3 },
-  { label: "Reports", path: "/reports", icon: BarChart3 },
-  { label: "Settings", path: "/settings", icon: Settings },
-];
+import { useAuthStore } from "../../features/auth/authStore";
+import { navItemsByRole } from "./navItems";
 
 export default function Sidebar() {
+  const user = useAuthStore((state) => state.user);
+
+  const navItems = user?.role ? navItemsByRole[user.role] : [];
+
   return (
     <aside className="flex min-h-screen w-72 flex-col border-r border-[#e6e8ec] bg-white">
       <div className="border-b border-[#e6e8ec] px-6 py-5">
@@ -49,7 +34,7 @@ export default function Sidebar() {
               className={({ isActive }) =>
                 `flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium ${
                   isActive
-                    ? "bg-[#f2f4f7] text-[#1f2937] font-semibold"
+                    ? "bg-[#f2f4f7] font-semibold text-[#1f2937]"
                     : "text-[#6b7280] hover:bg-[#f2f4f7]"
                 }`
               }
@@ -60,6 +45,16 @@ export default function Sidebar() {
           );
         })}
       </nav>
+
+      {user && (
+        <div className="border-t border-[#e6e8ec] p-4">
+          <div className="rounded-xl bg-[#f2f4f7] p-4">
+            <p className="text-xs text-[#6b7280]">Signed in</p>
+            <p className="mt-1 font-bold">{user.firstName} {user.lastName}</p>
+            <p className="mt-1 text-xs text-[#6b7280]">{user.role}</p>
+          </div>
+        </div>
+      )}
     </aside>
   );
 }

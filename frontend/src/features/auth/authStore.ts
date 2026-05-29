@@ -4,8 +4,12 @@ import type { AuthResponse, MeResponse, UserRole } from "../../types/auth";
 
 type AuthUser = {
   id: number;
+  firstName: string;
+  lastName: string;
   username: string;
+  email: string;
   role: UserRole;
+  // status: string;
 };
 
 type AuthState = {
@@ -20,7 +24,7 @@ type AuthState = {
   logout: () => Promise<void>;
 };
 
-export const useAuthStore = create<AuthState>((set) => ({
+export const useAuthStore = create<AuthState>((set, get) => ({
   user: null,
   isAuthenticated: false,
   isAuthChecked: false,
@@ -31,25 +35,19 @@ export const useAuthStore = create<AuthState>((set) => ({
     try {
       set({ isLoading: true, error: null });
 
-      const response = await api.post<AuthResponse>("/auth/login", {
+      // Backend validates credentials and sets HTTP-only accessToken cookie
+      await api.post("/auth/login", {
         username,
         password,
       });
 
-      set({
-        user: {
-          id: response.data.userId,
-          username: response.data.username,
-          role: response.data.role,
-        },
-        isAuthenticated: true,
-        isAuthChecked: true,
-        error: null,
-      });
+      // After cookie exists, load full current user profile
+      await get().fetchMe();
     } catch {
       set({
         user: null,
         isAuthenticated: false,
+        isAuthChecked: true,
         error: "Invalid username or password",
       });
 
@@ -63,16 +61,22 @@ export const useAuthStore = create<AuthState>((set) => ({
     try {
       set({ isLoading: true });
 
+      // Reads current user using cookie JWT
       const response = await api.get<MeResponse>("/users/me");
 
       set({
         user: {
           id: response.data.id,
+          firstName: response.data.firstName,
+          lastName: response.data.lastName,
           username: response.data.username,
+          email: response.data.email,
           role: response.data.role,
+          // status: response.data.status,
         },
         isAuthenticated: true,
         isAuthChecked: true,
+        error: null,
       });
     } catch {
       set({
@@ -86,11 +90,17 @@ export const useAuthStore = create<AuthState>((set) => ({
   },
 
   logout: async () => {
+  try {
+    // Ask backend to delete HTTP-only cookie
+    await api.post("/auth/logout");
+  } finally {
+    // Always clear frontend state, even if backend request fails
     set({
       user: null,
       isAuthenticated: false,
       isAuthChecked: true,
       error: null,
     });
-  },
+  }
+},
 }));
