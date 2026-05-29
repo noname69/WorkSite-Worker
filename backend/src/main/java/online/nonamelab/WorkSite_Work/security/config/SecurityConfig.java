@@ -68,36 +68,40 @@ public class SecurityConfig {
                         .accessDeniedHandler(customAccessDeniedHandler))
                 .authorizeHttpRequests(auth -> auth
 
-                        // PUBLIC
-                        .requestMatchers("/api/auth/login").permitAll()
-                        .requestMatchers("/api/auth/**").permitAll()
+                                // PUBLIC
+                                .requestMatchers("/api/auth/login").permitAll()
+                                .requestMatchers("/api/auth/**").permitAll()
 
-                        // SITE ASSIGNMENTS MANAGEMENT
-                        .requestMatchers("/api/admin/site-assignments/**")
-                        .hasAnyRole("ADMIN", "MANAGER")
+                                // SITE ASSIGNMENTS MANAGEMENT
+                                .requestMatchers("/api/admin/site-assignments/**")
+                                .hasAnyRole("ADMIN", "MANAGER")
 
-                        // SITE MANAGEMENT
-                        .requestMatchers("/api/admin/sites/**")
-                        .hasAnyRole("ADMIN", "MANAGER")
+                                // SITE MANAGEMENT
+                                .requestMatchers("/api/admin/sites/**")
+                                .hasAnyRole("ADMIN", "MANAGER")
 
-                        // ADMIN ONLY
-                        .requestMatchers("/api/admin/**")
-                        .hasRole("ADMIN")
+                                // USER MANAGEMENT
+                                .requestMatchers("/api/admin/users/**")
+                                .hasAnyRole("ADMIN", "MANAGER")
 
-                        // USER
-                        .requestMatchers("/api/users/**")
-                        .authenticated()
+                                // ADMIN ONLY
+                                .requestMatchers("/api/admin/**")
+                                .hasRole("ADMIN")
 
-                        // SITE READ
-                        .requestMatchers(HttpMethod.GET, "/api/sites/**")
-                        .authenticated()
+                                // USER
+                                .requestMatchers("/api/users/**")
+                                .authenticated()
 
-                        // SITE ASSIGNMENTS USER READ
-                        .requestMatchers("/api/site-assignments/**")
-                        .authenticated()
+                                // SITE READ
+                                .requestMatchers(HttpMethod.GET, "/api/sites/**")
+                                .authenticated()
 
-                        // EVERYTHING ELSE
-                        .anyRequest().authenticated()
+                                // SITE ASSIGNMENTS USER READ
+                                .requestMatchers("/api/site-assignments/**")
+                                .authenticated()
+
+                                // EVERYTHING ELSE
+                                .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .bearerTokenResolver(bearerTokenResolver)
