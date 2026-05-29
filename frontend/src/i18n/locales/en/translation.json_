@@ -1,0 +1,77 @@
+{
+  "language": {
+    "en": "English",
+    "lt": "Lithuanian"
+  },
+
+  "sidebar": {
+    "subtitle": "Construction workforce",
+    "signedIn": "Signed in",
+    "dashboard": "Dashboard",
+    "employees": "Employees",
+    "sites": "Sites",
+    "assignments": "Assignments",
+    "myAssignments": "My Assignments",
+    "projects": "Projects",
+    "timeEntries": "Time Entries",
+    "reports": "Reports",
+    "settings": "Settings",
+    "myProfile": "My Profile",
+    "orders": "Orders",
+    "inventory": "Inventory"
+  },
+  "roles": {
+    "admin": "Admin",
+    "manager": "Manager",
+    "employee": "Employee",
+    "supplier": "Supplier"
+  },
+  
+  "common": {
+    "actions": "Actions",
+    "close": "Close"
+  },
+  "sites": {
+    "loading": "Loading sites...",
+    "noDescription": "No description",
+    "noManager": "No manager assigned",
+    "noSitesFound": "No sites found",
+
+    "messages": {
+      "statusUpdated": "Site status updated successfully",
+      "restored": "Site restored successfully"
+    },
+
+    "table": {
+      "site": "Site",
+      "location": "Location",
+      "manager": "Manager",
+      "status": "Status",
+      "created": "Created"
+    },
+
+    "actions": {
+      "view": "View site",
+      "edit": "Edit site",
+      "assignWorkers": "Assign workers",
+      "activate": "Activate site",
+      "pause": "Pause site",
+      "resume": "Resume site",
+      "delete": "Delete site",
+      "restore": "Restore site"
+    },
+
+    "modals": {
+      "createPlaceholder": "CreateSiteModal will be here",
+      "editPlaceholder": "EditSiteModal for {{name}}",
+      "deletePlaceholder": "Confirm delete {{name}}"
+    }
+  },
+  "siteStatus": {
+    "PLANNED": "Planned",
+    "ACTIVE": "Active",
+    "PAUSED": "Paused",
+    "INACTIVE": "Inactive",
+    "ARCHIVED": "Archived"
+  }
+}
