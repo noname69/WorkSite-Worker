@@ -22,5 +22,5 @@ public class SiteAssignmentController {
     public ResponseEntity<List<SiteAssignmentResponse>> getMyAssignments() {
         return ResponseEntity.ok(siteAssignmentService.getMyAssignments());
     }
-    
+
 }
