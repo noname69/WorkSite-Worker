@@ -11,6 +11,7 @@ type AuthUser = {
 type AuthState = {
   user: AuthUser | null;
   isAuthenticated: boolean;
+  isAuthChecked: boolean;
   isLoading: boolean;
   error: string | null;
 
@@ -22,6 +23,7 @@ type AuthState = {
 export const useAuthStore = create<AuthState>((set) => ({
   user: null,
   isAuthenticated: false,
+  isAuthChecked: false,
   isLoading: false,
   error: null,
 
@@ -29,25 +31,25 @@ export const useAuthStore = create<AuthState>((set) => ({
     try {
       set({ isLoading: true, error: null });
 
-      // Backend sets JWT into HTTP-only cookie
       const response = await api.post<AuthResponse>("/auth/login", {
         username,
         password,
       });
 
       set({
-        error: null,
-        isAuthenticated: true,
         user: {
           id: response.data.userId,
           username: response.data.username,
           role: response.data.role,
         },
+        isAuthenticated: true,
+        isAuthChecked: true,
+        error: null,
       });
     } catch {
       set({
-        isAuthenticated: false,
         user: null,
+        isAuthenticated: false,
         error: "Invalid username or password",
       });
 
@@ -61,22 +63,22 @@ export const useAuthStore = create<AuthState>((set) => ({
     try {
       set({ isLoading: true });
 
-      // Checks if cookie JWT is still valid
       const response = await api.get<MeResponse>("/users/me");
 
       set({
-        error: null,
-        isAuthenticated: true,
         user: {
           id: response.data.id,
           username: response.data.username,
           role: response.data.role,
         },
+        isAuthenticated: true,
+        isAuthChecked: true,
       });
     } catch {
       set({
-        isAuthenticated: false,
         user: null,
+        isAuthenticated: false,
+        isAuthChecked: true,
       });
     } finally {
       set({ isLoading: false });
@@ -84,23 +86,11 @@ export const useAuthStore = create<AuthState>((set) => ({
   },
 
   logout: async () => {
-    // Later: call backend logout endpoint when you create it
-    // await api.post("/auth/logout");
-
     set({
       user: null,
       isAuthenticated: false,
+      isAuthChecked: true,
       error: null,
     });
-  },
-
-  isAdmin: () => {
-    return get().user?.role === "ADMIN";
-  },
-
-  isManager: () => {
-    const role = get().user?.role;
-
-    return role === "ADMIN" || role === "MANAGER";
   },
 }));

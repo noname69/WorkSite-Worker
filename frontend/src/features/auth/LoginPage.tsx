@@ -1,18 +1,14 @@
-import {
-  ArrowRight,
-  Eye,
-  HardHat,
-  Info,
-  LockKeyhole,
-  User,
-} from "lucide-react";
+import { ArrowRight, Eye, HardHat, Info, LockKeyhole, User } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useAuthStore } from "./authStore";
+import { useToastStore } from "../../store/toastStore";
 
 export default function LoginPage() {
+  const showToast = useToastStore((state) => state.showToast);
+
   const navigate = useNavigate();
-  const { login, isLoading, error } = useAuthStore();
+  const { login, isLoading } = useAuthStore();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -20,8 +16,12 @@ export default function LoginPage() {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    await login(username, password);
-    navigate("/");
+    try {
+      await login(username, password);
+      navigate("/");
+    } catch {
+      showToast("Invalid username or password", "error");
+    }
   };
 
   return (
@@ -39,9 +39,7 @@ export default function LoginPage() {
 
             <div>
               <h1 className="text-xl font-extrabold">WorkSite</h1>
-              <p className="text-sm text-white/60">
-                Construction workforce platform
-              </p>
+              <p className="text-sm text-white/60">Construction workforce platform</p>
             </div>
           </div>
 
@@ -55,8 +53,8 @@ export default function LoginPage() {
             </h2>
 
             <p className="mt-6 text-lg leading-8 text-white/60">
-              Plan site assignments, track monthly hours, manage projects and
-              keep construction teams organized.
+              Plan site assignments, track monthly hours, manage projects and keep
+              construction teams organized.
             </p>
           </div>
         </div>
@@ -90,9 +88,7 @@ export default function LoginPage() {
 
             <div>
               <h1 className="text-xl font-extrabold">WorkSite</h1>
-              <p className="text-sm text-[#6b7280]">
-                Construction workforce platform
-              </p>
+              <p className="text-sm text-[#6b7280]">Construction workforce platform</p>
             </div>
           </div>
 
@@ -111,12 +107,6 @@ export default function LoginPage() {
             </div>
 
             <form className="mt-8 space-y-5" onSubmit={handleSubmit}>
-              {error && (
-                <div className="rounded-2xl bg-[#fff1f1] p-4 text-sm font-medium text-red-700">
-                  {error}
-                </div>
-              )}
-
               <label className="block">
                 <span className="text-sm font-semibold">Username</span>
 
@@ -179,8 +169,7 @@ export default function LoginPage() {
                 <Info className="h-5 w-5 shrink-0 text-[#6b7280]" />
 
                 <p className="text-xs leading-5 text-[#6b7280]">
-                  Authentication uses HTTP-only cookies from the Spring Boot
-                  backend.
+                  Authentication uses HTTP-only cookies from the Spring Boot backend.
                 </p>
               </div>
             </div>
