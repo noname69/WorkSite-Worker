@@ -30,6 +30,5 @@ export async function deleteAdminUser(id: number) {
 }
 
 export async function restoreAdminUser(id: number) {
-  const response = await api.patch<UserResponse>(`/admin/users/${id}/restore`);
-  return response.data;
+  await api.patch(`/admin/users/${id}/restore`);
 }

@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import api from "../../api/api";
-import type { AuthResponse, MeResponse, UserRole } from "../../types/auth";
+import type { MeResponse, UserRole } from "../../types/auth";
 
 type AuthUser = {
   id: number;

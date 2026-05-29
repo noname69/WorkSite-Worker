@@ -6,11 +6,7 @@ import {
   restoreAdminUser,
   updateAdminUser,
 } from "./userApi";
-import type {
-  CreateUserRequest,
-  UpdateUserRequest,
-  UserResponse,
-} from "./userTypes";
+import type { CreateUserRequest, UpdateUserRequest, UserResponse } from "./userTypes";
 
 type UserStore = {
   users: UserResponse[];
@@ -55,29 +51,19 @@ export const useUserStore = create<UserStore>((set, get) => ({
     const updatedUser = await updateAdminUser(id, request);
 
     set({
-      users: get().users.map((user) =>
-        user.id === id ? updatedUser : user,
-      ),
+      users: get().users.map((user) => (user.id === id ? updatedUser : user)),
     });
   },
 
   deleteUser: async (id) => {
     await deleteAdminUser(id);
 
-    set({
-      users: get().users.map((user) =>
-        user.id === id ? { ...user, status: "INACTIVE" } : user,
-      ),
-    });
+    await get().fetchUsers();
   },
 
   restoreUser: async (id) => {
-    const restoredUser = await restoreAdminUser(id);
+    await restoreAdminUser(id);
 
-    set({
-      users: get().users.map((user) =>
-        user.id === id ? restoredUser : user,
-      ),
-    });
+    await get().fetchUsers();
   },
 }));

@@ -23,16 +23,12 @@ type EditUserForm = {
   role: UserRole;
 };
 
-export default function EditUserModal({
-  isOpen,
-  user,
-  onClose,
-}: EditUserModalProps) {
+export default function EditUserModal({ isOpen, user, onClose }: EditUserModalProps) {
   const currentUser = useAuthStore((state) => state.user);
   const updateUser = useUserStore((state) => state.updateUser);
   const showToast = useToastStore((state) => state.showToast);
 
-  const canEditRole = currentUser?.role === "ADMIN";
+  const canEditRole = currentUser?.role === "ADMIN" || currentUser?.role === "MANAGER";
 
   const {
     register,

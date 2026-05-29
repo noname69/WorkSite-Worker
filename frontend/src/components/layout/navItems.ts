@@ -22,7 +22,7 @@ export type NavItem = {
 export const navItemsByRole: Record<UserRole, NavItem[]> = {
   ADMIN: [
     { label: "Dashboard", path: "/", icon: LayoutDashboard },
-    { label: "Users", path: "/users", icon: Users },
+    { label: "Employees", path: "/users", icon: Users },
     { label: "Sites", path: "/sites", icon: Building2 },
     { label: "Assignments", path: "/assignments", icon: MapPin },
     { label: "Projects", path: "/projects", icon: FolderKanban },
@@ -33,6 +33,7 @@ export const navItemsByRole: Record<UserRole, NavItem[]> = {
 
   MANAGER: [
     { label: "Dashboard", path: "/", icon: LayoutDashboard },
+    { label: "Employees", path: "/users", icon: Users },
     { label: "Sites", path: "/sites", icon: Building2 },
     { label: "Assignments", path: "/assignments", icon: MapPin },
     { label: "Projects", path: "/projects", icon: FolderKanban },
