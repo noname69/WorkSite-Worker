@@ -67,17 +67,29 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/login").permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
 
-                        // USER ADMIN AREA
-                        .requestMatchers("/api/admin/sites/**").hasAnyRole("ADMIN", "MANAGER")
-                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/api/users/**").authenticated()
+                        // SITE ASSIGNMENTS MANAGEMENT
+                        .requestMatchers("/api/admin/site-assignments/**")
+                        .hasAnyRole("ADMIN", "MANAGER")
+
+                        // SITE MANAGEMENT
+                        .requestMatchers("/api/admin/sites/**")
+                        .hasAnyRole("ADMIN", "MANAGER")
+
+                        // ADMIN ONLY
+                        .requestMatchers("/api/admin/**")
+                        .hasRole("ADMIN")
+
+                        // USER
+                        .requestMatchers("/api/users/**")
+                        .authenticated()
+
                         // SITE READ
                         .requestMatchers(HttpMethod.GET, "/api/sites/**")
                         .authenticated()
 
-                        // SITE MANAGEMENT
-//                        .requestMatchers("/api/sites/**")
-//                        .hasAnyRole("ADMIN", "MANAGER")
+                        // SITE ASSIGNMENTS USER READ
+                        .requestMatchers("/api/site-assignments/**")
+                        .authenticated()
 
                         // EVERYTHING ELSE
                         .anyRequest().authenticated()
