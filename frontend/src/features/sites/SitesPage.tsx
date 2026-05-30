@@ -1,19 +1,21 @@
-import {
-  Eye,
-  PauseCircle,
-  Pencil,
-  PlayCircle,
-  RotateCcw,
-  Trash2,
-  UserPlus,
-} from "lucide-react";
+// import {
+//   Eye,
+//   PauseCircle,
+//   Pencil,
+//   PlayCircle,
+//   RotateCcw,
+//   Trash2,
+//   UserPlus,
+// } from "lucide-react";
+import SiteRowActions from "./components/SiteRowActions";
+
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
 import { getApiErrorMessage } from "../../api/apiError";
 import Badge from "../../components/ui/Badge";
-import IconButton from "../../components/ui/IconButton";
+// import IconButton from "../../components/ui/IconButton";
 import { useToastStore } from "../../store/toastStore";
 import SiteFilters from "./components/SiteFilters";
 import SiteSummaryCards from "./components/SiteSummaryCards";
@@ -170,10 +172,10 @@ export default function SitesPage() {
                   const isInactive =
                     site.status === "INACTIVE" || site.status === "ARCHIVED";
 
-                  const canDeleteSite =
-                    site.status === "ACTIVE" ||
-                    site.status === "PLANNED" ||
-                    site.status === "PAUSED";
+                  // const canDeleteSite =
+                  //   site.status === "ACTIVE" ||
+                  //   site.status === "PLANNED" ||
+                  //   site.status === "PAUSED";
 
                   return (
                     <tr
@@ -222,7 +224,7 @@ export default function SitesPage() {
                         {formatDate(site.createdAt)}
                       </td>
 
-                      <td className="px-6 py-5">
+                      {/* <td className="px-6 py-5">
                         <div className="flex justify-end gap-1">
                           <IconButton
                             title={t("actions.view", { ns: "sites" })}
@@ -300,6 +302,20 @@ export default function SitesPage() {
                             </IconButton>
                           )}
                         </div>
+                      </td> */}
+                      <td className="px-6 py-5">
+                        <SiteRowActions
+                          site={site}
+                          isInactive={isInactive}
+                          onView={() => navigate(`/sites/${site.id}`)}
+                          onEdit={() => setEditingSite(site)}
+                          onAssignWorkers={() =>
+                            navigate(`/sites/${site.id}/assignments`)
+                          }
+                          onUpdateStatus={(status) => handleUpdateStatus(site.id, status)}
+                          onDelete={() => setDeletingSite(site)}
+                          onRestore={() => handleRestoreSite(site.id)}
+                        />
                       </td>
                     </tr>
                   );
