@@ -1,0 +1,94 @@
+{
+  "loading": "Įkeliami objektai...",
+  "noDescription": "Aprašymo nėra",
+  "noManager": "Vadovas nepriskirtas",
+  "noSitesFound": "Objektų nerasta",
+
+  "summary": {
+    "total": {
+      "title": "Visi objektai",
+      "description": "Visi registruoti objektai"
+    },
+    "active": {
+      "title": "Aktyvūs",
+      "description": "Šiuo metu vykdomi"
+    },
+    "planned": {
+      "title": "Planuojami",
+      "description": "Būsimi objektai"
+    },
+    "inactive": {
+      "title": "Neaktyvūs",
+      "description": "Ištrinti arba archyvuoti"
+    }
+  },
+
+  "filters": {
+    "title": "Objektų sąrašas",
+    "description": "Ieškokite, redaguokite, aktyvuokite, pristabdykite, archyvuokite arba atkurkite objektus",
+    "searchPlaceholder": "Ieškoti pagal objekto pavadinimą, miestą, adresą arba vadovą...",
+    "allStatuses": "Visos būsenos"
+  },
+
+  "actions": {
+    "new": "Naujas objektas",
+    "view": "Peržiūrėti objektą",
+    "edit": "Redaguoti objektą",
+    "assignWorkers": "Priskirti darbuotojus",
+    "activate": "Aktyvuoti objektą",
+    "pause": "Pristabdyti objektą",
+    "resume": "Tęsti objektą",
+    "delete": "Ištrinti objektą",
+    "restore": "Atkurti objektą",
+     "create": "Sukurti objektą",
+     "save": "Išsaugoti pakeitimus"
+  },
+
+  "messages": {
+    "statusUpdated": "Objekto būsena sėkmingai atnaujinta",
+    "restored": "Objektas sėkmingai atkurtas",
+    "created": "Objektas sėkmingai sukurtas",
+    "updated": "Objektas sėkmingai atnaujintas",
+    "deleted": "Objektas sėkmingai ištrintas"
+  },
+
+  "form": {
+    "name": "Objekto pavadinimas",
+    "description": "Aprašymas",
+    "country": "Šalis",
+    "city": "Miestas",
+    "address": "Adresas",
+    "manager": "Vadovas",
+    "managerHelp": "Laikinas laukas. Vėliau pakeisime į vadovo pasirinkimą iš sąrašo."
+  },
+
+  "validation": {
+    "nameRequired": "Objekto pavadinimas yra privalomas",
+    "nameMin": "Objekto pavadinimas turi būti bent 2 simbolių",
+    "nameMax": "Objekto pavadinimas turi būti trumpesnis nei 100 simbolių",
+    "countryRequired": "Šalis yra privaloma",
+    "cityRequired": "Miestas yra privalomas",
+    "addressRequired": "Adresas yra privalomas"
+  },
+
+  "table": {
+    "site": "Objektas",
+    "location": "Vieta",
+    "manager": "Vadovas",
+    "status": "Būsena",
+    "created": "Sukurta"
+  },
+
+  "modals": {
+    "createPlaceholder": "Čia bus objekto kūrimo forma",
+    "editPlaceholder": "Objekto redagavimo forma: {{name}}",
+    "deletePlaceholder": "Patvirtinti objekto ištrynimą: {{name}}",
+    "createTitle": "Sukurti naują objektą",
+    "createDescription": "Pridėkite naują statybos objektą ir priskirkite vadovą.",
+    "editTitle": "Redaguoti objektą",
+    "editDescription": "Atnaujinkite statybos objekto informaciją.",
+    "deleteTitle": "Ištrinti objektą?",
+    "deleteDescription": "Pasirinktas objektas bus deaktyvuotas.",
+    "deleteQuestion": "Ar tikrai norite ištrinti objektą „{{name}}“?"
+  }
+}

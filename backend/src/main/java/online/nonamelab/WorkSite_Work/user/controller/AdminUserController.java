@@ -3,6 +3,7 @@ package online.nonamelab.WorkSite_Work.user.controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import online.nonamelab.WorkSite_Work.user.dto.*;
+import online.nonamelab.WorkSite_Work.user.model.UserRole;
 import online.nonamelab.WorkSite_Work.user.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -59,6 +60,15 @@ public class AdminUserController {
     public ResponseEntity<Void> restoreUser(@PathVariable Long id) {
         userService.restoreUser(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/options")
+    public ResponseEntity<List<UserOptionResponse>> getUserOptions(
+            @RequestParam UserRole role
+    ) {
+        return ResponseEntity.ok(
+                userService.getUserOptions(role)
+        );
     }
 
 }

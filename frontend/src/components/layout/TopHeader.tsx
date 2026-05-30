@@ -2,6 +2,7 @@ import { Bell, LogOut, Menu, Search } from "lucide-react";
 import { useNavigate } from "react-router";
 import { useAuthStore } from "../../features/auth/authStore";
 import IconButton from "../ui/IconButton";
+import LanguageSelect from "./LanguageSelect";
 
 type TopHeaderProps = {
   title: string;
@@ -46,6 +47,8 @@ export default function TopHeader({
         <IconButton title="Notifications">
           <Bell size={16} />
         </IconButton>
+
+        <LanguageSelect />
 
         {user && (
           <button

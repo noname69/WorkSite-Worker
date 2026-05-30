@@ -1,0 +1,77 @@
+{
+  "language": {
+    "en": "Anglų",
+    "lt": "Lietuvių"
+  },
+  
+  "sidebar": {
+    "subtitle": "Statybų komanda",
+    "signedIn": "Prisijungęs",
+    "dashboard": "Skydelis",
+    "employees": "Darbuotojai",
+    "sites": "Objektai",
+    "assignments": "Priskyrimai",
+    "myAssignments": "Mano priskyrimai",
+    "projects": "Projektai",
+    "timeEntries": "Darbo apskaita",
+    "reports": "Ataskaitos",
+    "settings": "Nustatymai",
+    "myProfile": "Mano profilis",
+    "orders": "Užsakymai",
+    "inventory": "Inventorius"
+  },
+  "roles": {
+    "admin": "Administratorius",
+    "manager": "Vadovas",
+    "employee": "Darbuotojas",
+    "supplier": "Tiekėjas"
+  },
+
+  "common": {
+    "actions": "Veiksmai",
+    "close": "Uždaryti"
+  },
+  "sites": {
+    "loading": "Įkeliami objektai...",
+    "noDescription": "Aprašymo nėra",
+    "noManager": "Vadovas nepriskirtas",
+    "noSitesFound": "Objektų nerasta",
+
+    "messages": {
+      "statusUpdated": "Objekto būsena sėkmingai atnaujinta",
+      "restored": "Objektas sėkmingai atkurtas"
+    },
+
+    "table": {
+      "site": "Objektas",
+      "location": "Vieta",
+      "manager": "Vadovas",
+      "status": "Būsena",
+      "created": "Sukurta"
+    },
+
+    "actions": {
+      "view": "Peržiūrėti objektą",
+      "edit": "Redaguoti objektą",
+      "assignWorkers": "Priskirti darbuotojus",
+      "activate": "Aktyvuoti objektą",
+      "pause": "Pristabdyti objektą",
+      "resume": "Tęsti objektą",
+      "delete": "Ištrinti objektą",
+      "restore": "Atkurti objektą"
+    },
+
+    "modals": {
+      "createPlaceholder": "Čia bus objekto kūrimo forma",
+      "editPlaceholder": "Objekto redagavimo forma: {{name}}",
+      "deletePlaceholder": "Patvirtinti objekto ištrynimą: {{name}}"
+    }
+  },
+  "siteStatus": {
+    "PLANNED": "Planuojamas",
+    "ACTIVE": "Aktyvus",
+    "PAUSED": "Pristabdytas",
+    "INACTIVE": "Neaktyvus",
+    "ARCHIVED": "Archyvuotas"
+  }
+}

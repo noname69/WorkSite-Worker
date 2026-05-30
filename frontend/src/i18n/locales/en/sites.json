@@ -1,0 +1,93 @@
+{
+  "loading": "Loading sites...",
+  "noDescription": "No description",
+  "noManager": "No manager assigned",
+  "noSitesFound": "No sites found",
+
+  "summary": {
+    "total": {
+      "title": "Total sites",
+      "description": "All registered sites"
+    },
+    "active": {
+      "title": "Active",
+      "description": "Currently working"
+    },
+    "planned": {
+      "title": "Planned",
+      "description": "Upcoming sites"
+    },
+    "inactive": {
+      "title": "Inactive",
+      "description": "Deleted or archived"
+    }
+  },
+
+  "filters": {
+    "title": "Site Directory",
+    "description": "Search, edit, activate, pause, archive or restore sites",
+    "searchPlaceholder": "Search by site name, city, address or manager...",
+    "allStatuses": "All statuses"
+  },
+
+  "actions": {
+    "new": "New site",
+    "view": "View site",
+    "edit": "Edit site",
+    "assignWorkers": "Assign workers",
+    "activate": "Activate site",
+    "pause": "Pause site",
+    "resume": "Resume site",
+    "delete": "Delete site",
+    "restore": "Restore site",
+    "create": "Create site",
+    "save": "Save changes"
+  },
+
+  "messages": {
+    "statusUpdated": "Site status updated successfully",
+    "restored": "Site restored successfully",
+    "created": "Site created successfully",
+    "updated": "Site updated successfully",
+    "deleted": "Site deleted successfully"
+  },
+
+  "form": {
+    "name": "Site name",
+    "description": "Description",
+    "country": "Country",
+    "city": "City",
+    "address": "Address",
+    "manager": "Manager",
+    "managerHelp": "Temporary field. Later we will replace it with manager dropdown."
+  },
+  "validation": {
+    "nameRequired": "Site name is required",
+    "nameMin": "Site name must be at least 2 characters",
+    "nameMax": "Site name must be less than 100 characters",
+    "countryRequired": "Country is required",
+    "cityRequired": "City is required",
+    "addressRequired": "Address is required"
+  },
+
+  "table": {
+    "site": "Site",
+    "location": "Location",
+    "manager": "Manager",
+    "status": "Status",
+    "created": "Created"
+  },
+
+  "modals": {
+    "createPlaceholder": "CreateSiteModal will be here",
+    "editPlaceholder": "EditSiteModal for {{name}}",
+    "deletePlaceholder": "Confirm delete {{name}}",
+    "createTitle": "Create new site",
+    "createDescription": "Add a new construction site and assign a manager.",
+    "editTitle": "Edit site",
+    "editDescription": "Update construction site information.",
+    "deleteTitle": "Delete site?",
+    "deleteDescription": "This will deactivate the selected site.",
+    "deleteQuestion": "Are you sure you want to delete {{name}}?"
+  }
+}

@@ -1,6 +1,7 @@
 package online.nonamelab.WorkSite_Work.user.repository;
 
 import online.nonamelab.WorkSite_Work.user.model.User;
+import online.nonamelab.WorkSite_Work.user.model.UserRole;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -15,4 +16,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByIdAndDeletedAtIsNull(Long id);
 
     List<User> findAllByDeletedAtIsNull();
-}
+
+    List<User> findByRoleAndDeletedAtIsNullOrderByFirstNameAscLastNameAsc(UserRole role);}

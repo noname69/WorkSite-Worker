@@ -19,6 +19,8 @@ public interface UserMapper {
 
     AdminUserResponse toAdminResponse(User user);
 
+    UserOptionResponse toOptionResponse(User user);
+
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "passwordHash", ignore = true)
     @Mapping(target = "status", ignore = true)
